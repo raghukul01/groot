@@ -8,11 +8,9 @@ import (
 	"github.com/spf13/viper"
 )
 
-
 func setupEnvVariables(confName string) {
-	viper.AutomaticEnv()
 	viper.SetConfigName(confName)
-	viper.AddConfigPath("$HOME/go/src/github.com/raghukul01/groot/config") // usual path to config
+	viper.AddConfigPath("$HOME/go/src/github.com/raghukul01/groot/src/config") // usual path to config
 	viper.AddConfigPath("./config")
 	viper.AddConfigPath(".") // optionally look for config in the working directory
 }
@@ -30,6 +28,7 @@ func Load() {
 		logrus.WithError(err).Fatal("env load failed")
 		panic(err)
 	}
+	viper.AutomaticEnv()
 
 	configName := strings.ToLower(viper.GetString("env"))
 	logrus.WithField("configName", configName).Info()
