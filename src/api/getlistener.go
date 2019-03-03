@@ -1,37 +1,40 @@
 package api
 
 import (
+	"strconv"
 	"net/http"
+	"io"
 
 	"github.com/gorilla/mux"
 
 	"github.com/spf13/viper"
 
-	"github.com/gorilla/mux"
-
 	"os/exec"
 )
 
-func AddGetApis(router *mux.Router) {
+func addGetApis(router *mux.Router) {
 	GrepApi(router)
 }
 
 func GrepApi(router *mux.Router) {
 	router.HandleFunc(
-		"/grep/{key}", patternSearch,
+		"/grep/{key}", PatternSearch,
 	).Methods(http.MethodGet)
 }
 
 func PatternSearch(w http.ResponseWriter, req *http.Request) {
 	vars := mux.Vars(req)
-	key := vars["key"]
-	//grep key in all log files
-	// assuming input string is str
-	// file is the file in which str is supposed to be searched
-	node := viper.GetString("NODE_INDEX")
-	file := viper.GetString("PROCESSES[0][\"NAME\"]")
-	cmd := exec.command("grep", str, file)
-	output := cmd.Run()
-	// node and process are node and process index
-	return output, node, file
+	str := vars["key"]
+	nodePath := viper.GetString("NODE_DIR")
+	numProcess := viper.GetInt("PROCESS_COUNT")
+	pathMap := viper.GetStringMapString("PROCESSES")
+	var result string
+
+	for process := 0; process < numProcess; process++ {
+		filePath := nodePath + pathMap[strconv.Itoa(process)]
+		resp, _ := exec.Command("grep", str, filePath).Output()
+		result = result + string(resp)
+	}
+	w.WriteHeader(http.StatusOK)
+	io.WriteString(w, result)
 }
