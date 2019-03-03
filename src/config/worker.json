@@ -1,0 +1,15 @@
+{
+	"HOSTNAME": "0.0.0.0",
+    "PORT": "8005",
+	"PROCESS_COUNT": 2,
+	"NODE_DIR": "HackNode",
+	"NODE_INDEX": 1,
+	"PROCESSES": [
+		{
+			"NAME": "Process1.log"
+		},
+		{
+			"NAME": "Process1.log"
+		}
+	]
+}
