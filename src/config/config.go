@@ -1,10 +1,13 @@
 package config
 
 import (
+	"strings"
+
 	"github.com/fsnotify/fsnotify"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
+
 
 func setupEnvVariables(confName string) {
 	viper.AutomaticEnv()
@@ -16,7 +19,7 @@ func setupEnvVariables(confName string) {
 
 func valid(name string) bool {
 	name = strings.ToUpper(name)
-	return name == "WORKER" || name = "GROOT"
+	return name == "WORKER" || name == "GROOT"
 }
 
 // Load the config, can be accessed globally

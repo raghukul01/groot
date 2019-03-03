@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/raghukul01/groot/api"
+	"github.com/raghukul01/groot/src/api"
 
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
@@ -25,7 +25,7 @@ func (s Server) SetupComponents() {
 
 // New setups & returns a server
 func New() *Server {
-	router := mux.NewRouter().Subrouter()
+	router := mux.NewRouter()
 	hostName := viper.GetString("HOSTNAME")
 	addr := hostName + ":" + viper.GetString("PORT")
 	server := Server{router, addr}
