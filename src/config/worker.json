@@ -1,11 +1,13 @@
 {
 	"HOSTNAME": "0.0.0.0",
     "PORT": "8005",
-	"PROCESS_COUNT": 2,
-	"NODE_DIR": "HackNode",
+	"PROCESS_COUNT": 4,
+	"NODE_DIR": "/home/raghukul/go/src/github.com/raghukul01/groot/log_simulator/HackNode1/",
 	"NODE_INDEX": 1,
 	"PROCESSES": {
 		"0": "Process1.log",
-		"1": "Process2.log"
+		"1": "Process2.log",
+		"2": "Process3.log",
+		"3": "Process4.log"
 	}
 }

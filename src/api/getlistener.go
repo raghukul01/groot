@@ -1,9 +1,9 @@
 package api
 
 import (
-	"strconv"
-	"net/http"
 	"io"
+	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 
@@ -35,6 +35,8 @@ func PatternSearch(w http.ResponseWriter, req *http.Request) {
 		resp, _ := exec.Command("grep", str, filePath).Output()
 		result = result + string(resp)
 	}
+
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
 	io.WriteString(w, result)
 }

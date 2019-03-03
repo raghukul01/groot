@@ -1,15 +1,16 @@
 package groot
 
 import (
-	"strconv"
-	"github.com/spf13/viper"
-	"github.com/sirupsen/logrus"
 	"bufio"
-  	"fmt"
+	"fmt"
+	"net/http"
 	"os"
-	"sync"
+	"strconv"
 	"strings"
-	"net/http" 
+	"sync"
+
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 
 	"io/ioutil"
 )
@@ -20,7 +21,7 @@ func RequestHandler() {
 		// read the complete text
 		fmt.Print("-> ")
 		text, _ := reader.ReadString('\n')
-		
+
 		text = strings.Replace(text, "\n", "", -1)
 		words := strings.Fields(text)
 
@@ -59,11 +60,12 @@ func grepHandler(words []string, addrArray []string) {
 	for idx, addr := range addrArray {
 		go func(idx int, addr string) {
 			defer wg.Done()
-
-			resp, err := http.Get(addr + endpoint)
+			url := addr + endpoint
+			resp, err := http.Get(url)
 			if err != nil {
 				logrus.Info("failed to make get request")
 			}
+			defer resp.Body.Close()
 			body, _ := ioutil.ReadAll(resp.Body)
 			respMap[idx] = string(body)
 		}(idx, addr)
