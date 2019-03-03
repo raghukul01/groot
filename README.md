@@ -1,2 +1,2 @@
 # Groot
-A Distributed log analizer written in Golang.
+A Distributed log analyser written in Golang.
