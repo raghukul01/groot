@@ -1,0 +1,22 @@
+1. grep
+
+	- groot 
+		input search keyword, and make a get request to all nodes, merge result and show. concurrently
+
+	- worker
+		listen to and endpoint, for grep sys.exec(grep, ) response return + node_id + process_id
+
+
+2. head, tail
+	
+	-groot:
+		listener: recieve new logs, and write to a file.
+
+	-worker: 
+		array number of lines for each process.
+		cron 100ms
+			if lines changes send new lines to groot.
+
+3. logs b/w particular timestamp
+	similar to grep
+

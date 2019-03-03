@@ -9,4 +9,6 @@ func main() {
 	config.Load()
 	webServer := server.New()
 	webServer.ServeHTTP()
+	val := viper.Get_sting('env')
+	
 }
