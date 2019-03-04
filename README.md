@@ -1,6 +1,10 @@
 # Groot
 A Distributed log analyser written in Golang.
 
+#### Why GO ? 
+The motivation for using GO was to make things concurrent so that the design is easily scalable and would make things efficient if we have multiple cores. Our code is generic enough to handle changes in configuration on groot and worker side. (Live changes are also supported).
+Both groot and worker can be started just by giving an environment variable, the setup is minimal.
+
 We have two entities - groot and worker. Groot is our main query server which runs on the admin side. 
 A worker runs on every node. All the queries and their results are communicated via network calls.
 
@@ -12,7 +16,7 @@ Dependencies :
 
 ### Running Groot
 
-1. Modify config file according to requirements :
+1. Modify config file according to requirements (`config/groot.json`):
 ```
 	"HOSTNAME": "0.0.0.0", 
     	"PORT": "8080",
@@ -45,7 +49,7 @@ $ go run src/cmd/main.go
 
 ### Running Worker
 
-1. Modify config file according to requirements :
+1. Modify config file according to requirements (`config/worker.json`):
 ```
 	"HOSTNAME": "0.0.0.0",
     	"PORT": "8005",
