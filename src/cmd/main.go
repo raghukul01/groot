@@ -20,9 +20,9 @@ func main() {
 	}
 	entityType := strings.ToLower(viper.GetString("env"))
 	if entityType == "worker" {
-		worker.LiveHandler()
-		// webServer := server.New()
-		// webServer.ServeHTTP()
+		go worker.LiveHandler()
+		webServer := server.New()
+		webServer.ServeHTTP()
 	} else {
 		groot.RequestHandler()
 	}
