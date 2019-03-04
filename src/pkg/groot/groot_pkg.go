@@ -13,6 +13,8 @@ import (
 	"github.com/spf13/viper"
 
 	"io/ioutil"
+
+	server "github.com/raghukul01/groot/src/init"
 )
 
 func RequestHandler() {
@@ -49,6 +51,10 @@ func RequestHandler() {
 }
 
 func grepHandler(words []string, addrArray []string) {
+	if len(words) != 2 {
+		logrus.Fatal("Two arguments must be passed")
+		return
+	}
 	key := words[1]
 	var wg sync.WaitGroup
 
@@ -61,7 +67,10 @@ func grepHandler(words []string, addrArray []string) {
 		go func(idx int, addr string) {
 			defer wg.Done()
 			url := addr + endpoint
-			resp, err := http.Get(url)
+			client := http.Client{}
+			request, err := http.NewRequest("GET", url, nil)
+			logrus.Info(request)
+			resp, err := client.Do(request)
 			if err != nil {
 				logrus.Info("failed to make get request")
 			}
@@ -75,7 +84,12 @@ func grepHandler(words []string, addrArray []string) {
 }
 
 func livelogHandler(words []string, addrArray []string) {
-
+	if len(words) != 1 {
+		logrus.Info("Invalid number of arguments")
+		return
+	}
+	webserver := server.New()
+	webserver.ServeHTTP()
 }
 
 func timeStampHandler(words []string, addrArray []string) {

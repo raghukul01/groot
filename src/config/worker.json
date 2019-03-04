@@ -2,6 +2,7 @@
 	"HOSTNAME": "0.0.0.0",
     "PORT": "8005",
 	"PROCESS_COUNT": 4,
+	"LIVE_ENDPOINT": "http://localhost/api/live/",
 	"NODE_DIR": "/home/raghukul/go/src/github.com/raghukul01/groot/log_simulator/HackNode1/",
 	"NODE_INDEX": 1,
 	"PROCESSES": {

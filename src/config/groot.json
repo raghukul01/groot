@@ -1,4 +1,6 @@
 {
+	"HOSTNAME": "0.0.0.0",
+    "PORT": "8080",
 	"NODE_COUNT": 1,
 	"NUM_PROCESS": [4],
 	"NODES": {

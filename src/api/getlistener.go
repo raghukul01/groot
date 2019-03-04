@@ -5,20 +5,30 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/gorilla/mux"
 
 	"github.com/spf13/viper"
 
+	"net/url"
 	"os/exec"
 )
 
 func addGetApis(router *mux.Router) {
-	GrepApi(router)
+	grepApi(router)
+	addLiveApi(router)
 }
 
-func GrepApi(router *mux.Router) {
+func grepApi(router *mux.Router) {
 	router.HandleFunc(
 		"/grep/{key}", PatternSearch,
+	).Methods(http.MethodGet)
+}
+
+func addLiveApi(router *mux.Router) {
+	router.HandleFunc(
+		"/live/{key}", liveHandler,
 	).Methods(http.MethodGet)
 }
 
@@ -39,4 +49,12 @@ func PatternSearch(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	io.WriteString(w, result)
+}
+
+func liveHandler(w http.ResponseWriter, req *http.Request) {
+	vars := mux.Vars(req)
+	str, _ := url.PathUnescape(vars["key"])
+	logrus.Info(str)
+
+	w.WriteHeader(http.StatusOK)
 }
