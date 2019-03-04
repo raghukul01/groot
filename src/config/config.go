@@ -22,7 +22,7 @@ func valid(name string) bool {
 
 // Load the config, can be accessed globally
 func Load() {
-	logrus.Info("Func: Viper Load()")
+	// logrus.Info("Func: Viper Load()")
 	err := viper.BindEnv("env")
 	if err != nil {
 		logrus.WithError(err).Fatal("env load failed")
@@ -31,7 +31,7 @@ func Load() {
 	viper.AutomaticEnv()
 
 	configName := strings.ToLower(viper.GetString("env"))
-	logrus.WithField("configName", configName).Info()
+	// logrus.WithField("configName", configName).Info()
 
 	if !valid(configName) {
 		logrus.Fatal("Invalid config name, set correct env variable")

@@ -8,7 +8,6 @@ import (
 	"github.com/raghukul01/groot/src/api"
 
 	"github.com/gorilla/mux"
-	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
@@ -42,6 +41,6 @@ func (server Server) ServeHTTP() {
 		ReadTimeout:  time.Minute,
 	}
 
-	logrus.Info("Server starting at addr: ", server.Address)
-	logrus.Fatal(srv.ListenAndServe())
+	// logrus.Info("Server starting at addr: ", server.Address)
+	// logrus.Fatal(srv.ListenAndServe())
 }

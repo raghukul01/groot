@@ -69,7 +69,6 @@ func grepHandler(words []string, addrArray []string) {
 			url := addr + endpoint
 			client := http.Client{}
 			request, err := http.NewRequest("GET", url, nil)
-			logrus.Info(request)
 			resp, err := client.Do(request)
 			if err != nil {
 				logrus.Info("failed to make get request")
